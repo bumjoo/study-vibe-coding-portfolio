@@ -95,6 +95,17 @@ body {
 .sidebar-footer {
     margin-top: auto;
     padding: 0 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.fictional-notice {
+    font-size: 10px;
+    color: #444;
+    line-height: 1.4;
+    opacity: 0.6;
+    font-weight: 400;
 }
 
 .settings-btn {
