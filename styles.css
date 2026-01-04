@@ -205,43 +205,54 @@ body {
 }
 
 .developer-label {
+    position: absolute;
+    right: 8%;
+    bottom: 15%;
     text-align: right;
-    margin-bottom: 100px;
+    z-index: 15; /* 사진(10)보다 위, 메인 텍스트(20)보다는 아래 */
 }
 
 .developer-label h2 {
-    font-size: 80px;
+    font-size: 90px;
     line-height: 0.9;
     font-weight: 900;
     text-transform: uppercase;
+    color: var(--text-light);
 }
 
 .outline-text {
     -webkit-text-stroke: 1px var(--text-light);
     color: transparent;
+    opacity: 0.5;
 }
 
 .pink-underline {
-    width: 120px;
-    height: 8px;
+    width: 100px;
+    height: 6px;
     background-color: var(--primary-pink);
     margin-left: auto;
-    margin-top: 20px;
+    margin-top: 15px;
 }
 
 .hero-center-content {
     position: absolute;
     top: 50%;
-    left: 20%;
+    left: 10%; /* 왼쪽 여백을 조금 더 주어 여유 공간 확보 */
     transform: translateY(-50%);
-    max-width: 500px;
-    z-index: 10;
+    max-width: 480px;
+    z-index: 30; /* 텍스트를 최상단으로 */
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.7); /* 반투명 흰색 배경 추가 */
+    backdrop-filter: blur(10px); /* 배경 블러 처리로 가독성 극대화 */
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
 }
 
 .greeting {
-    font-size: 48px;
+    font-size: 42px;
     font-weight: 800;
-    color: #333;
+    color: #1a1a2e; /* 더 진한 색상 */
+    margin-bottom: 5px;
 }
 
 .main-name {
@@ -249,13 +260,16 @@ body {
     font-weight: 900;
     color: var(--primary-purple);
     line-height: 1;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
 }
 
 .description {
-    color: #666;
-    line-height: 1.6;
-    margin-bottom: 40px;
+    color: #111; /* 완전한 어두운 색으로 변경 */
+    font-size: 18px;
+    font-weight: 600; /* 글자 두께 증가 */
+    line-height: 1.7;
+    margin-bottom: 35px;
+    word-break: keep-all; /* 한글 줄바꿈 자연스럽게 */
 }
 
 .hero-actions .download-cv-btn {
@@ -290,12 +304,14 @@ body {
 .hero-image-overlay {
     position: absolute;
     top: 50%;
-    left: 50%;
-    transform: translate(-30%, -50%);
-    width: 500px; /* 너비 약간 확대 */
-    height: 400px; /* 가로형 사진에 맞춰 높이 조정 */
-    z-index: 5;
-    box-shadow: 20px 20px 60px rgba(0,0,0,0.3);
+    right: 5%; /* 오른쪽 여백 최적화 */
+    transform: translateY(-50%);
+    width: 620px; /* 가로형 사진에 맞춰 너비 증가 */
+    height: 440px;
+    z-index: 10;
+    box-shadow: 30px 30px 80px rgba(0,0,0,0.4);
+    border-radius: 15px;
+    overflow: hidden;
 }
 
 .hero-image-overlay img {
@@ -426,32 +442,177 @@ body {
     border-color: #111;
 }
 
+/* Mobile Header Styles */
+.mobile-header {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background-color: var(--sidebar-bg);
+    z-index: 2000;
+    padding: 0 20px;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mobile-logo {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-light);
+}
+
+.menu-toggle {
+    background: none;
+    border: none;
+    color: var(--text-light);
+    font-size: 24px;
+    cursor: pointer;
+}
+
 /* Responsive Design */
-@media (max-width: 1200px) {
+@media (max-width: 1024px) {
+    body {
+        overflow: auto; /* 전체 스크롤 허용 */
+    }
+
+    .mobile-header {
+        display: flex;
+        justify-content: center; /* 로고 중앙 정렬 */
+    }
+
+    .menu-toggle {
+        display: none; /* 모바일 메뉴 버튼 제거 */
+    }
+
     .sidebar {
-        width: 80px;
-        padding: 20px 0;
+        display: none; /* 사이드바 완전히 제거 */
     }
-    .sidebar-name, .sidebar-tagline, .nav-item {
-        display: none;
-    }
+
     .main-content {
-        margin-left: 80px;
-        width: calc(100% - 80px);
+        margin-left: 0;
+        width: 100%;
+        padding-top: 60px;
+        height: auto; /* 고정 높이 해제하여 전체 스크롤 가능하게 */
+        overflow-y: visible;
     }
+
+    .content-section {
+        display: block !important; /* 모든 섹션 강제 표시 */
+        opacity: 1 !important;
+        transform: none !important;
+        min-height: auto;
+        border-bottom: 1px solid rgba(0,0,0,0.05); /* 섹션 구분선 */
+        animation: none !important; /* 애니메이션 제거 */
+    }
+
+    /* Home Hero Mobile */
+    .hero-split {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .hero-left, .hero-right {
+        flex: none;
+        width: 100%;
+        padding: 40px 20px;
+        height: auto;
+    }
+
+    .hero-right {
+        padding-bottom: 100px;
+    }
+
     .hero-center-content {
-        left: 10%;
+        position: relative;
+        top: 0;
+        left: 0;
+        transform: none;
+        max-width: 100%;
+        padding: 40px 20px;
+        background: none;
+        backdrop-filter: none;
+        box-shadow: none;
+    }
+
+    .greeting {
+        font-size: 32px;
+        color: var(--text-dark); /* 밝은 배경 위 */
+    }
+
+    .main-name {
+        font-size: 60px;
+    }
+
+    .hero-image-overlay {
+        position: relative;
+        top: 0;
+        right: 0;
+        transform: none;
+        width: 90%;
+        margin: 20px auto;
+        height: 350px;
+    }
+
+    .developer-label {
+        position: relative;
+        right: 0;
+        bottom: 0;
+        text-align: center;
+        margin-top: 40px;
+        width: 100%;
+    }
+
+    .developer-label h2 {
+        font-size: 50px;
+    }
+
+    .pink-underline {
+        margin: 10px auto;
+    }
+
+    /* About Mobile */
+    #about {
+        padding: 60px 20px;
+    }
+
+    .about-container {
+        gap: 40px;
+    }
+
+    .section-title {
+        font-size: 36px;
+    }
+
+    .image-wrapper {
+        height: 300px;
+    }
+
+    /* Experience Mobile */
+    .section-wrapper {
+        padding: 60px 20px;
+    }
+
+    .exp-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Contact Mobile */
+    .contact-card-box {
+        flex-direction: column;
+    }
+
+    .contact-text {
+        padding: 40px 20px;
+    }
+
+    .contact-avatar-box {
+        padding: 40px 20px;
     }
 }
 
-@media (max-width: 992px) {
-    .about-container {
-        flex-direction: column;
-    }
-    .about-image-card {
-        width: 100%;
-    }
-}
 
 /* New Sections Styling */
 .section-wrapper {
